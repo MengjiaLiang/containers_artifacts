@@ -28,7 +28,7 @@ spec:
           secretName: db-user-pass
           optional: true
       containers:
-      - image: registrynoo3886.azurecr.io/tripinsights/poi:1.0
+      - image: registrynoo3886.azurecr.io/tripinsights/tripviewer:1.0
         imagePullPolicy: IfNotPresent
         name: tripviewer
         ports:
