@@ -4,7 +4,7 @@ metadata:
   labels:
     app: userprofile
   name: userprofile
-  namespace: default
+  namespace: api
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
