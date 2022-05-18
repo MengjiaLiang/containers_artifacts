@@ -7,7 +7,7 @@ metadata:
   namespace: default
 spec:
   progressDeadlineSeconds: 600
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -41,6 +41,11 @@ spec:
         - name: db-user-pass-volume
           mountPath: "/secrets"
           readOnly: true
+        env:
+          - name: USERPROFILE_API_ENDPOINT
+            value: "http://userprofile-service:80"
+          - name: TRIPS_API_ENDPOINT
+            value: "http://trips-service:80"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
