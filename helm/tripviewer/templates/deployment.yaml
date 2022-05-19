@@ -43,9 +43,9 @@ spec:
           readOnly: true
         env:
           - name: USERPROFILE_API_ENDPOINT
-            value: "http://userprofile-service:80"
+            value: "http://userprofile-service.api.svc.cluster.local:80"
           - name: TRIPS_API_ENDPOINT
-            value: "http://trips-service:80"
+            value: "http://trips-service.api.svc.cluster.local:80"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
