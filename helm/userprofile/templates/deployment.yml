@@ -23,10 +23,12 @@ spec:
         app: userprofile
     spec:
       volumes:
-        - name: db-user-pass-volume
-          secret:
-            secretName: db-user-pass
-            optional: true
+      - name: db-user-pass-volume
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "trips-kv-msi"
       containers:
         - image: registrynoo3886.azurecr.io/tripinsights/userprofile:1.0
           imagePullPolicy: IfNotPresent
