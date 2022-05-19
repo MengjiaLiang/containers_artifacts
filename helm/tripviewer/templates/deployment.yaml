@@ -22,11 +22,6 @@ spec:
       labels:
         app: tripviewer
     spec:
-      volumes:
-      - name: db-user-pass-volume
-        secret:
-          secretName: db-user-pass
-          optional: true
       containers:
       - image: registrynoo3886.azurecr.io/tripinsights/tripviewer:1.0
         imagePullPolicy: IfNotPresent
@@ -37,10 +32,6 @@ spec:
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-        volumeMounts:
-        - name: db-user-pass-volume
-          mountPath: "/secrets"
-          readOnly: true
         env:
           - name: USERPROFILE_API_ENDPOINT
             value: "http://userprofile-service.api.svc.cluster.local:80"
