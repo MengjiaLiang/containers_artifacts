@@ -2,16 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: user-java
-  name: user-java
-  namespace: default
+    app: tripviewer
+  name: tripviewer
+  namespace: web
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: user-java
+      app: tripviewer
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: user-java
+        app: tripviewer
     spec:
       volumes:
       - name: db-user-pass-volume
@@ -28,9 +28,9 @@ spec:
           secretName: db-user-pass
           optional: true
       containers:
-      - image: registrynoo3886.azurecr.io/tripinsights/user-java:1.0
+      - image: registrynoo3886.azurecr.io/tripinsights/tripviewer:1.0
         imagePullPolicy: IfNotPresent
-        name: user-java
+        name: tripviewer
         ports:
         - containerPort: 80
           protocol: TCP
@@ -41,6 +41,11 @@ spec:
         - name: db-user-pass-volume
           mountPath: "/secrets"
           readOnly: true
+        env:
+          - name: USERPROFILE_API_ENDPOINT
+            value: "http://userprofile-service.api.svc.cluster.local:80"
+          - name: TRIPS_API_ENDPOINT
+            value: "http://trips-service.api.svc.cluster.local:80"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

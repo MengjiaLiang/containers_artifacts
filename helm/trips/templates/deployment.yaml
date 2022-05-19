@@ -4,7 +4,7 @@ metadata:
   labels:
     app: trips
   name: trips
-  namespace: default
+  namespace: api
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
